@@ -36,6 +36,17 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [tab, setTab] = useState<TabId>("home");
   const [scrollTo, setScrollTo] = useState<string | null>(null);
+  const [authed, setAuthed] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    try {
+      setAuthed(sessionStorage.getItem(AUTH_KEY) === "1");
+    } catch {
+      /* sessionStorage indisponível */
+    }
+    setReady(true);
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
