@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BadgeCheck, ChevronDown, ChevronUp } from "lucide-react";
+import { BadgeCheck, ChevronDown, ChevronUp, Lock } from "lucide-react";
 
 const brl = (n: number) =>
   n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2 });
