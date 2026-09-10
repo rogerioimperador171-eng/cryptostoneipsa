@@ -6,7 +6,10 @@ import { HomeTab } from "@/components/app/HomeTab";
 import { MarketsTab } from "@/components/app/MarketsTab";
 import { PerpsTab } from "@/components/app/PerpsTab";
 import { SearchTab } from "@/components/app/SearchTab";
+import { LoginScreen } from "@/components/app/LoginScreen";
 import type { TabId } from "@/components/app/types";
+
+const AUTH_KEY = "csip-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,6 +36,17 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [tab, setTab] = useState<TabId>("home");
   const [scrollTo, setScrollTo] = useState<string | null>(null);
+  const [authed, setAuthed] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    try {
+      setAuthed(sessionStorage.getItem(AUTH_KEY) === "1");
+    } catch {
+      /* sessionStorage indisponível */
+    }
+    setReady(true);
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -58,6 +72,25 @@ function Index() {
     }
     setTab("home");
   };
+
+  if (!ready) {
+    return <div className="min-h-screen bg-background" />;
+  }
+
+  if (!authed) {
+    return (
+      <LoginScreen
+        onSuccess={() => {
+          try {
+            sessionStorage.setItem(AUTH_KEY, "1");
+          } catch {
+            /* sessionStorage indisponível */
+          }
+          setAuthed(true);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[520px] flex-col overflow-x-hidden bg-background text-foreground">
