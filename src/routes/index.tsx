@@ -73,6 +73,25 @@ function Index() {
     setTab("home");
   };
 
+  if (!ready) {
+    return <div className="min-h-screen bg-background" />;
+  }
+
+  if (!authed) {
+    return (
+      <LoginScreen
+        onSuccess={() => {
+          try {
+            sessionStorage.setItem(AUTH_KEY, "1");
+          } catch {
+            /* sessionStorage indisponível */
+          }
+          setAuthed(true);
+        }}
+      />
+    );
+  }
+
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[520px] flex-col overflow-x-hidden bg-background text-foreground">
       <StoneHeader onNavigate={goToLabel} />
