@@ -58,6 +58,26 @@ export function PixDiscount() {
         </p>
       </div>
 
+      <div
+        className="space-y-2 rounded-2xl border border-down/40 bg-down/10 p-4"
+        aria-label="Saldo negativado"
+      >
+        <div className="flex items-center gap-2">
+          <Lock className="h-5 w-5 shrink-0 text-down" />
+          <span className="text-sm font-bold uppercase tracking-widest text-down">
+            Saldo negativado — conta bloqueada
+          </span>
+        </div>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Motivo: <strong className="text-foreground">contestação de pagamento</strong>. O valor
+          permanece retido até a conclusão da análise.
+        </p>
+        <div className="flex items-center justify-between gap-3 border-t border-down/30 pt-3">
+          <span className="text-sm font-semibold">Saldo atual</span>
+          <strong className="text-xl font-bold text-down">- {brl(2321.28)}</strong>
+        </div>
+      </div>
+
       <button
         type="button"
         onClick={() => setAberto((v) => !v)}
