@@ -6,7 +6,10 @@ import { HomeTab } from "@/components/app/HomeTab";
 import { MarketsTab } from "@/components/app/MarketsTab";
 import { PerpsTab } from "@/components/app/PerpsTab";
 import { SearchTab } from "@/components/app/SearchTab";
+import { LoginScreen } from "@/components/app/LoginScreen";
 import type { TabId } from "@/components/app/types";
+
+const AUTH_KEY = "csip-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
